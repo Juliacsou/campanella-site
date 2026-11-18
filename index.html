@@ -1,0 +1,944 @@
+<!DOCTYPE html>
+<html lang="pt-BR" class="scroll-smooth">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Campanella ProfSupport</title>
+  <link rel="icon" type="image/png" href="assets/images/logo.png" />
+
+  <!-- Google Fonts -->
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Instrument+Serif:ital@0;1&family=Inter:wght@400;500;600;700&family=Plus+Jakarta+Sans:wght@500;600;700;800&display=swap" rel="stylesheet" />
+
+  <!-- Tailwind CSS via CDN -->
+  <script src="https://cdn.tailwindcss.com"></script>
+  <script>
+    tailwind.config = {
+      theme: {
+        extend: {
+          colors: {
+            border: "hsl(214 32% 91%)",
+            input: "hsl(214 32% 91%)",
+            ring: "hsl(221 83% 53%)",
+            background: "#F8F9FA",
+            foreground: "hsl(222 47% 11%)",
+            primary: {
+              DEFAULT: "#2563eb",
+              foreground: "#ffffff",
+            },
+            muted: {
+              DEFAULT: "hsl(210 40% 96%)",
+              foreground: "hsl(215 25% 27%)",
+            },
+            card: {
+              DEFAULT: "#ffffff",
+              foreground: "hsl(222 47% 11%)",
+            },
+            destructive: "hsl(0 84% 60%)",
+          },
+          fontFamily: {
+            sans: ["Inter", "sans-serif"],
+            display: ["'Plus Jakarta Sans'", "sans-serif"],
+            serif: ["'Instrument Serif'", "Georgia", "serif"],
+          },
+          borderRadius: {
+            DEFAULT: "0.9rem",
+            "3xl": "1.5rem",
+          }
+        }
+      }
+    }
+  </script>
+
+  <style>
+    /* Custom Utilities & Polish */
+    .font-serif-instrument {
+      font-family: 'Instrument Serif', Georgia, serif;
+    }
+    .focus-ring:focus-visible {
+      outline: 2px solid #2563eb;
+      outline-offset: 2px;
+    }
+  </style>
+</head>
+<body class="min-h-screen bg-[#F8F9FA] text-foreground font-sans antialiased selection:bg-primary/20 selection:text-primary">
+
+  <!-- ================= NAVBAR ================= -->
+  <header id="main-nav" class="fixed top-0 inset-x-0 z-40 transition-all duration-300 bg-transparent">
+    <div class="max-w-7xl mx-auto px-6 h-16 md:h-20 flex items-center justify-between">
+      <a href="#topo" class="font-display font-bold text-xl md:text-2xl leading-none text-foreground tracking-tight">
+        Campanella<span class="font-serif-instrument text-[#619eff] font-normal italic"> ProfSupport</span>
+      </a>
+
+      <!-- Desktop Links -->
+      <nav class="hidden md:flex items-center gap-8">
+        <a href="#como-funciona" class="text-sm font-medium text-muted-foreground hover:text-foreground transition-colors">Como funciona</a>
+        <a href="#planos" class="text-sm font-medium text-muted-foreground hover:text-foreground transition-colors">Planos</a>
+        <a href="#resultado" class="text-sm font-medium text-muted-foreground hover:text-foreground transition-colors">Por resultado</a>
+        <a href="#implantacoes" class="text-sm font-medium text-muted-foreground hover:text-foreground transition-colors">Implantações</a>
+      </nav>
+
+      <!-- Desktop WhatsApp Button -->
+      <div class="hidden md:flex items-center">
+        <a
+          href="https://wa.me/5541991644723?text=Ol%C3%A1!%20Gostaria%20de%20falar%20com%20a%20equipe%20da%20Campanella%20ProfSupport."
+          target="_blank"
+          rel="noreferrer"
+          class="text-sm font-semibold px-5 py-2.5 rounded-full hover:brightness-95 transition min-h-[44px] focus-ring flex items-center bg-[#477beb] text-white shadow-sm"
+        >
+          Falar pelo WhatsApp
+        </a>
+      </div>
+
+      <!-- Mobile Menu Toggle Button -->
+      <div class="flex items-center gap-3 md:hidden">
+        <a
+          href="https://wa.me/5541991644723?text=Ol%C3%A1!%20Gostaria%20de%20falar%20com%20a%20equipe%20da%20Campanella%20ProfSupport."
+          target="_blank"
+          rel="noreferrer"
+          class="text-xs font-semibold px-3 py-2 rounded-full bg-[#477beb] text-white"
+        >
+          WhatsApp
+        </a>
+        <button id="mobile-menu-btn" aria-label="Abrir menu" class="p-2 rounded-lg text-foreground hover:bg-muted focus-ring">
+          <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16M4 18h16"/>
+          </svg>
+        </button>
+      </div>
+    </div>
+
+    <!-- Mobile Dropdown -->
+    <div id="mobile-menu" class="hidden md:hidden bg-card/95 backdrop-blur-xl border-b border-border px-6 py-4 space-y-3">
+      <a href="#como-funciona" class="block text-sm font-medium text-muted-foreground hover:text-foreground py-1">Como funciona</a>
+      <a href="#planos" class="block text-sm font-medium text-muted-foreground hover:text-foreground py-1">Planos</a>
+      <a href="#resultado" class="block text-sm font-medium text-muted-foreground hover:text-foreground py-1">Por resultado</a>
+      <a href="#implantacoes" class="block text-sm font-medium text-muted-foreground hover:text-foreground py-1">Implantações</a>
+    </div>
+  </header>
+
+  <main>
+    <!-- ================= HERO ================= -->
+    <section id="topo" class="pt-32 md:pt-44 pb-20 md:pb-28 px-6">
+      <div class="max-w-7xl mx-auto grid lg:grid-cols-[1.1fr_0.9fr] gap-14 items-center">
+        <div>
+          <span class="inline-block text-xs font-semibold tracking-[0.18em] uppercase text-muted-foreground mb-6">
+            Soluções administrativas
+          </span>
+          <h1 class="font-display font-extrabold text-[clamp(2.6rem,7vw,5.5rem)] leading-[1.05] text-foreground tracking-tight">
+            Campanella <span class="italic text-primary font-serif-instrument font-normal">ProfSupport</span>
+          </h1>
+          <p class="mt-6 text-lg md:text-xl font-medium text-foreground/85 max-w-xl">
+            Gestão administrativa especializada para professores e escolas de idiomas.
+          </p>
+          <p class="mt-6 text-muted-foreground max-w-xl leading-relaxed">
+            A Campanella ProfSupport cuida da operação administrativa da sua escola para que você possa focar no que realmente importa: ensinar, vender e crescer. Atuamos como parceiros estratégicos, oferecendo suporte comercial, matrículas, financeiro, gestão acadêmica e processos administrativos.
+          </p>
+          <div class="mt-10 flex flex-wrap gap-3">
+            <a href="#planos" class="bg-primary text-white px-7 py-3.5 rounded-full font-semibold hover:brightness-95 transition min-h-[44px] flex items-center focus-ring shadow-sm">
+              Ver planos
+            </a>
+            <button onclick="openModal('')" class="px-7 py-3.5 rounded-full font-semibold border border-border bg-card hover:bg-muted/60 transition min-h-[44px] focus-ring">
+              Solicitar contato
+            </button>
+          </div>
+        </div>
+
+        <div>
+          <div class="rounded-3xl overflow-hidden shadow-[0_30px_80px_-30px_rgba(15,23,42,0.45)]">
+            <img
+              src="assets/images/hero.png"
+              alt="Professora em escola de idiomas moderna com luz natural"
+              class="w-full h-[440px] md:h-[600px] object-cover"
+              loading="eager"
+            />
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- ================= COMO FUNCIONA ================= -->
+    <section id="como-funciona" class="py-24 px-6 bg-[#F8F9FA]">
+      <div class="max-w-7xl mx-auto">
+        <div class="max-w-2xl">
+          <h2 class="font-display font-bold text-4xl md:text-5xl text-foreground leading-tight tracking-tight">
+            Como funciona?
+          </h2>
+          <p class="mt-4 text-muted-foreground text-base md:text-lg">
+            Uma assessoria administrativa recorrente e estruturada, do primeiro contato à operação completa.
+          </p>
+        </div>
+
+        <ol class="mt-14 grid md:grid-cols-2 lg:grid-cols-3 gap-6">
+          <li class="rounded-3xl border border-border bg-card p-7 shadow-sm transition hover:shadow-md">
+            <span class="w-10 h-10 rounded-full bg-primary text-white font-semibold flex items-center justify-center">1</span>
+            <h3 class="mt-5 text-lg font-semibold text-foreground">Escolha o plano ideal</h3>
+            <p class="mt-2 text-sm text-muted-foreground leading-relaxed">Selecione o plano que melhor atende a realidade atual da sua escola.</p>
+          </li>
+          <li class="rounded-3xl border border-border bg-card p-7 shadow-sm transition hover:shadow-md">
+            <span class="w-10 h-10 rounded-full bg-primary text-white font-semibold flex items-center justify-center">2</span>
+            <h3 class="mt-5 text-lg font-semibold text-foreground">Recebemos sua operação</h3>
+            <p class="mt-2 text-sm text-muted-foreground leading-relaxed">Entendemos seus processos atuais e organizamos o início da operação.</p>
+          </li>
+          <li class="rounded-3xl border border-border bg-card p-7 shadow-sm transition hover:shadow-md">
+            <span class="w-10 h-10 rounded-full bg-primary text-white font-semibold flex items-center justify-center">3</span>
+            <h3 class="mt-5 text-lg font-semibold text-foreground">Implantamos as ferramentas necessárias</h3>
+            <p class="mt-2 text-sm text-muted-foreground leading-relaxed">Configuramos as ferramentas e recursos disponíveis no plano contratado.</p>
+          </li>
+          <li class="rounded-3xl border border-border bg-card p-7 shadow-sm transition hover:shadow-md">
+            <span class="w-10 h-10 rounded-full bg-primary text-white font-semibold flex items-center justify-center">4</span>
+            <h3 class="mt-5 text-lg font-semibold text-foreground">Assumimos as rotinas operacionais</h3>
+            <p class="mt-2 text-sm text-muted-foreground leading-relaxed">Executamos as atividades administrativas previstas no plano, respeitando os fluxos internos da Campanella ProfSupport.</p>
+          </li>
+          <li class="rounded-3xl border border-border bg-card p-7 shadow-sm transition hover:shadow-md md:col-span-2 lg:col-span-1">
+            <span class="w-10 h-10 rounded-full bg-primary text-white font-semibold flex items-center justify-center">5</span>
+            <h3 class="mt-5 text-lg font-semibold text-foreground">Cresça com segurança</h3>
+            <p class="mt-2 text-sm text-muted-foreground leading-relaxed">Conforme sua escola evolui, você pode migrar para planos mais completos e ampliar o suporte operacional.</p>
+          </li>
+        </ol>
+      </div>
+    </section>
+
+    <!-- ================= PLANOS ================= -->
+    <section id="planos" class="py-24 px-6 bg-[#F8F9FA]">
+      <div class="max-w-7xl mx-auto">
+        <div class="max-w-2xl">
+          <h2 class="font-display font-bold text-4xl md:text-6xl text-foreground leading-tight tracking-tight">
+            Escolha o plano da sua escola
+          </h2>
+          <p class="mt-4 text-muted-foreground text-base md:text-lg">
+            Planos por capacidade operacional, do primeiro aluno à operação completa.
+          </p>
+        </div>
+
+        <!-- Aviso Contrato Anual -->
+        <div class="mt-6 rounded-2xl bg-card border border-primary/30 p-5 text-sm text-foreground flex items-start gap-3 max-w-3xl shadow-sm">
+          <span class="w-2 h-2 rounded-full bg-primary mt-1.5 shrink-0"></span>
+          <span>Todos os planos possuem contrato anual com pagamento parcelado em 12 vezes. Não trabalhamos com contratação mensal avulsa.</span>
+        </div>
+
+        <!-- Linha do Tempo / Evolução dos Planos -->
+        <div class="mt-8 flex flex-wrap items-center gap-2 text-sm">
+          <span class="rounded-full bg-card border border-border px-4 py-2 shadow-sm">
+            <span class="font-semibold text-foreground">Start</span>
+            <span class="text-muted-foreground"> · Organização Comercial</span>
+          </span>
+          <svg class="w-4 h-4 text-muted-foreground shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7"/></svg>
+
+          <span class="rounded-full bg-card border border-border px-4 py-2 shadow-sm">
+            <span class="font-semibold text-foreground">Growth</span>
+            <span class="text-muted-foreground"> · Comercial + Matrículas</span>
+          </span>
+          <svg class="w-4 h-4 text-muted-foreground shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7"/></svg>
+
+          <span class="rounded-full bg-card border border-border px-4 py-2 shadow-sm">
+            <span class="font-semibold text-foreground">Pro</span>
+            <span class="text-muted-foreground"> · Comercial + Matrículas + Financeiro</span>
+          </span>
+          <svg class="w-4 h-4 text-muted-foreground shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7"/></svg>
+
+          <span class="rounded-full bg-card border border-border px-4 py-2 shadow-sm">
+            <span class="font-semibold text-foreground">Premium</span>
+            <span class="text-muted-foreground"> · Gestão Administrativa Completa</span>
+          </span>
+        </div>
+
+        <!-- Grade de Planos -->
+        <div class="mt-14 grid gap-6 sm:grid-cols-2">
+
+          <!-- 1. START -->
+          <article class="flex flex-col rounded-3xl p-7 transition-all duration-300 hover:-translate-y-1.5 bg-card border border-border shadow-sm hover:shadow-xl">
+            <h3 class="font-display font-bold text-3xl text-foreground">Start</h3>
+            <div class="mt-6">
+              <p class="text-[2.4rem] leading-none font-bold text-foreground">12x de R$ 399,90</p>
+              <p class="mt-2 text-sm font-medium text-foreground/70">Contrato anual</p>
+            </div>
+            <button type="button" onclick="openModal('Start')" class="mt-6 w-full min-h-[44px] rounded-full font-semibold transition flex items-center justify-center focus-ring bg-foreground text-white hover:opacity-90">
+              Contratar este plano
+            </button>
+            <div class="mt-7 space-y-5 flex-1">
+              <div>
+                <p class="text-[11px] font-bold uppercase tracking-widest mb-2 text-muted-foreground">Comercial</p>
+                <ul class="space-y-1.5">
+                  <li class="text-sm flex gap-2 text-foreground/85"><svg class="w-4 h-4 shrink-0 mt-0.5 text-primary" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2.5" d="M5 13l4 4L19 7"/></svg><span>Atendimento inicial dos leads</span></li>
+                  <li class="text-sm flex gap-2 text-foreground/85"><svg class="w-4 h-4 shrink-0 mt-0.5 text-primary" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2.5" d="M5 13l4 4L19 7"/></svg><span>Follow-up comercial</span></li>
+                  <li class="text-sm flex gap-2 text-foreground/85"><svg class="w-4 h-4 shrink-0 mt-0.5 text-primary" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2.5" d="M5 13l4 4L19 7"/></svg><span>Agendamento de reuniões</span></li>
+                  <li class="text-sm flex gap-2 text-foreground/85"><svg class="w-4 h-4 shrink-0 mt-0.5 text-primary" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2.5" d="M5 13l4 4L19 7"/></svg><span>Organização do CRM</span></li>
+                </ul>
+              </div>
+              <div>
+                <p class="text-[11px] font-bold uppercase tracking-widest mb-2 text-muted-foreground">Relatórios</p>
+                <ul class="space-y-1.5">
+                  <li class="text-sm flex gap-2 text-foreground/85"><svg class="w-4 h-4 shrink-0 mt-0.5 text-primary" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2.5" d="M5 13l4 4L19 7"/></svg><span>Conversão de leads</span></li>
+                  <li class="text-sm flex gap-2 text-foreground/85"><svg class="w-4 h-4 shrink-0 mt-0.5 text-primary" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2.5" d="M5 13l4 4L19 7"/></svg><span>1 reunião mensal</span></li>
+                  <li class="text-sm flex gap-2 text-foreground/85"><svg class="w-4 h-4 shrink-0 mt-0.5 text-primary" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2.5" d="M5 13l4 4L19 7"/></svg><span>1 relatório mensal</span></li>
+                </ul>
+              </div>
+              <div>
+                <p class="text-[11px] font-bold uppercase tracking-widest mb-2 text-muted-foreground">Implantação</p>
+                <ul class="space-y-1.5">
+                  <li class="text-sm flex gap-2 text-foreground/85"><svg class="w-4 h-4 shrink-0 mt-0.5 text-primary" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2.5" d="M5 13l4 4L19 7"/></svg><span>CRM Comercial</span></li>
+                </ul>
+              </div>
+            </div>
+            <p class="mt-6 pt-5 border-t border-border text-sm leading-relaxed text-muted-foreground">
+              Ideal para escolas que estão começando a estruturar seu processo comercial.
+            </p>
+          </article>
+
+          <!-- 2. GROWTH -->
+          <article class="flex flex-col rounded-3xl p-7 transition-all duration-300 hover:-translate-y-1.5 bg-card border border-border shadow-sm hover:shadow-xl">
+            <h3 class="font-display font-bold text-3xl text-foreground">Growth</h3>
+            <div class="mt-6">
+              <p class="text-[2.4rem] leading-none font-bold text-foreground">12x de R$ 699,80</p>
+              <p class="mt-2 text-sm font-medium text-foreground/70">Contrato anual</p>
+            </div>
+            <button type="button" onclick="openModal('Growth')" class="mt-6 w-full min-h-[44px] rounded-full font-semibold transition flex items-center justify-center focus-ring bg-foreground text-white hover:opacity-90">
+              Contratar este plano
+            </button>
+            <div class="mt-7 space-y-5 flex-1">
+              <p class="text-sm font-semibold flex items-center gap-2 text-foreground">
+                <svg class="w-4 h-4 text-primary" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M14 5l7 7m0 0l-7 7m7-7H3"/></svg>
+                Tudo do plano Start
+              </p>
+              <div>
+                <p class="text-[11px] font-bold uppercase tracking-widest mb-2 text-muted-foreground">Matrículas</p>
+                <ul class="space-y-1.5">
+                  <li class="text-sm flex gap-2 text-foreground/85"><svg class="w-4 h-4 shrink-0 mt-0.5 text-primary" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2.5" d="M5 13l4 4L19 7"/></svg><span>Até 15 matrículas durante o contrato anual</span></li>
+                  <li class="text-sm flex gap-2 text-foreground/85"><svg class="w-4 h-4 shrink-0 mt-0.5 text-primary" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2.5" d="M5 13l4 4L19 7"/></svg><span>Até 30 rematrículas durante o contrato anual</span></li>
+                </ul>
+              </div>
+              <div>
+                <p class="text-[11px] font-bold uppercase tracking-widest mb-2 text-muted-foreground">Relatórios</p>
+                <ul class="space-y-1.5">
+                  <li class="text-sm flex gap-2 text-foreground/85"><svg class="w-4 h-4 shrink-0 mt-0.5 text-primary" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2.5" d="M5 13l4 4L19 7"/></svg><span>Conversão de leads</span></li>
+                  <li class="text-sm flex gap-2 text-foreground/85"><svg class="w-4 h-4 shrink-0 mt-0.5 text-primary" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2.5" d="M5 13l4 4L19 7"/></svg><span>Matrículas realizadas</span></li>
+                  <li class="text-sm flex gap-2 text-foreground/85"><svg class="w-4 h-4 shrink-0 mt-0.5 text-primary" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2.5" d="M5 13l4 4L19 7"/></svg><span>Taxa de fechamento</span></li>
+                  <li class="text-sm flex gap-2 text-foreground/85"><svg class="w-4 h-4 shrink-0 mt-0.5 text-primary" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2.5" d="M5 13l4 4L19 7"/></svg><span>Reunião quinzenal</span></li>
+                </ul>
+              </div>
+              <div>
+                <p class="text-[11px] font-bold uppercase tracking-widest mb-2 text-muted-foreground">Implantação</p>
+                <ul class="space-y-1.5">
+                  <li class="text-sm flex gap-2 text-foreground/85"><svg class="w-4 h-4 shrink-0 mt-0.5 text-primary" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2.5" d="M5 13l4 4L19 7"/></svg><span>CRM Comercial</span></li>
+                  <li class="text-sm flex gap-2 text-foreground/85"><svg class="w-4 h-4 shrink-0 mt-0.5 text-primary" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2.5" d="M5 13l4 4L19 7"/></svg><span>Organização do WhatsApp Business</span></li>
+                </ul>
+              </div>
+              <div>
+                <p class="text-[11px] font-bold uppercase tracking-widest mb-2 text-muted-foreground">Serviços por Resultado</p>
+                <ul class="space-y-1.5">
+                  <li class="text-sm flex gap-2 text-foreground/85"><svg class="w-4 h-4 shrink-0 mt-0.5 text-primary" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2.5" d="M5 13l4 4L19 7"/></svg><span>Fechamento por WhatsApp (venda do curso para o lead)</span></li>
+                  <li class="text-sm flex gap-2 text-foreground/85"><svg class="w-4 h-4 shrink-0 mt-0.5 text-primary" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2.5" d="M5 13l4 4L19 7"/></svg><span>Fechamento por reunião (venda do curso para o lead)</span></li>
+                </ul>
+              </div>
+            </div>
+            <p class="mt-6 pt-5 border-t border-border text-sm leading-relaxed text-muted-foreground">
+              Ideal para escolas em crescimento.
+            </p>
+          </article>
+
+          <!-- 3. PRO (DESTACADO / MAIS ESCOLHIDO) -->
+          <article class="flex flex-col rounded-3xl p-7 transition-all duration-300 hover:-translate-y-1.5 bg-foreground text-white shadow-[0_30px_60px_-25px_rgba(15,23,42,0.6)] ring-1 ring-white/10 relative">
+            <span class="self-start text-[11px] uppercase tracking-widest bg-primary text-white px-3 py-1 rounded-full font-bold mb-4">
+              Mais escolhido
+            </span>
+            <h3 class="font-display font-bold text-3xl text-white">Pro</h3>
+            <div class="mt-6">
+              <p class="text-[2.4rem] leading-none font-bold text-white">12x de R$ 896,90</p>
+              <p class="mt-2 text-sm font-medium text-white/70">Contrato anual</p>
+            </div>
+            <button type="button" onclick="openModal('Pro')" class="mt-6 w-full min-h-[44px] rounded-full font-semibold transition flex items-center justify-center focus-ring bg-primary text-white hover:brightness-95 shadow-md">
+              Contratar este plano
+            </button>
+            <div class="mt-7 space-y-5 flex-1">
+              <p class="text-sm font-semibold flex items-center gap-2 text-white/90">
+                <svg class="w-4 h-4 text-primary" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M14 5l7 7m0 0l-7 7m7-7H3"/></svg>
+                Tudo do plano Growth
+              </p>
+              <div>
+                <p class="text-[11px] font-bold uppercase tracking-widest mb-2 text-white/50">Comercial</p>
+                <ul class="space-y-1.5">
+                  <li class="text-sm flex gap-2 text-white/85"><svg class="w-4 h-4 shrink-0 mt-0.5 text-primary" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2.5" d="M5 13l4 4L19 7"/></svg><span>Recuperação de leads antigos</span></li>
+                  <li class="text-sm flex gap-2 text-white/85"><svg class="w-4 h-4 shrink-0 mt-0.5 text-primary" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2.5" d="M5 13l4 4L19 7"/></svg><span>Recuperação de alunos inativos</span></li>
+                </ul>
+              </div>
+              <div>
+                <p class="text-[11px] font-bold uppercase tracking-widest mb-2 text-white/50">Matrículas</p>
+                <ul class="space-y-1.5">
+                  <li class="text-sm flex gap-2 text-white/85"><svg class="w-4 h-4 shrink-0 mt-0.5 text-primary" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2.5" d="M5 13l4 4L19 7"/></svg><span>Até 20 matrículas durante o contrato anual</span></li>
+                  <li class="text-sm flex gap-2 text-white/85"><svg class="w-4 h-4 shrink-0 mt-0.5 text-primary" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2.5" d="M5 13l4 4L19 7"/></svg><span>Até 50 rematrículas durante o contrato anual</span></li>
+                </ul>
+              </div>
+              <div>
+                <p class="text-[11px] font-bold uppercase tracking-widest mb-2 text-white/50">Gestão Financeira</p>
+                <ul class="space-y-1.5">
+                  <li class="text-sm flex gap-2 text-white/85"><svg class="w-4 h-4 shrink-0 mt-0.5 text-primary" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2.5" d="M5 13l4 4L19 7"/></svg><span>Emissão de boletos para até 60 alunos</span></li>
+                  <li class="text-sm flex gap-2 text-white/85"><svg class="w-4 h-4 shrink-0 mt-0.5 text-primary" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2.5" d="M5 13l4 4L19 7"/></svg><span>Segunda via de boletos (até 10 envios mensais)</span></li>
+                  <li class="text-sm flex gap-2 text-white/85"><svg class="w-4 h-4 shrink-0 mt-0.5 text-primary" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2.5" d="M5 13l4 4L19 7"/></svg><span>Cobrança de inadimplentes (até 15 cobranças mensais)</span></li>
+                </ul>
+              </div>
+              <div>
+                <p class="text-[11px] font-bold uppercase tracking-widest mb-2 text-white/50">Relatórios</p>
+                <ul class="space-y-1.5">
+                  <li class="text-sm flex gap-2 text-white/85"><svg class="w-4 h-4 shrink-0 mt-0.5 text-primary" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2.5" d="M5 13l4 4L19 7"/></svg><span>Conversão de leads</span></li>
+                  <li class="text-sm flex gap-2 text-white/85"><svg class="w-4 h-4 shrink-0 mt-0.5 text-primary" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2.5" d="M5 13l4 4L19 7"/></svg><span>Matrículas realizadas</span></li>
+                  <li class="text-sm flex gap-2 text-white/85"><svg class="w-4 h-4 shrink-0 mt-0.5 text-primary" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2.5" d="M5 13l4 4L19 7"/></svg><span>Taxa de fechamento</span></li>
+                  <li class="text-sm flex gap-2 text-white/85"><svg class="w-4 h-4 shrink-0 mt-0.5 text-primary" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2.5" d="M5 13l4 4L19 7"/></svg><span>Reunião semanal</span></li>
+                  <li class="text-sm flex gap-2 text-white/85"><svg class="w-4 h-4 shrink-0 mt-0.5 text-primary" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2.5" d="M5 13l4 4L19 7"/></svg><span>Relatório mensal</span></li>
+                </ul>
+              </div>
+              <div>
+                <p class="text-[11px] font-bold uppercase tracking-widest mb-2 text-white/50">Implantação</p>
+                <ul class="space-y-1.5">
+                  <li class="text-sm flex gap-2 text-white/85"><svg class="w-4 h-4 shrink-0 mt-0.5 text-primary" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2.5" d="M5 13l4 4L19 7"/></svg><span>CRM Comercial, WhatsApp Business</span></li>
+                  <li class="text-sm flex gap-2 text-white/85"><svg class="w-4 h-4 shrink-0 mt-0.5 text-primary" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2.5" d="M5 13l4 4L19 7"/></svg><span>Class Report, Carteirinha Estudantil</span></li>
+                  <li class="text-sm flex gap-2 text-white/85"><svg class="w-4 h-4 shrink-0 mt-0.5 text-primary" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2.5" d="M5 13l4 4L19 7"/></svg><span>Pesquisa de Satisfação, Padronização dos Contratos</span></li>
+                </ul>
+              </div>
+              <div>
+                <p class="text-[11px] font-bold uppercase tracking-widest mb-2 text-white/50">Serviços por Resultado</p>
+                <ul class="space-y-1.5">
+                  <li class="text-sm flex gap-2 text-white/85"><svg class="w-4 h-4 shrink-0 mt-0.5 text-primary" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2.5" d="M5 13l4 4L19 7"/></svg><span>Fechamento por WhatsApp e por reunião</span></li>
+                </ul>
+              </div>
+            </div>
+            <p class="mt-6 pt-5 border-t border-white/15 text-sm leading-relaxed text-white/70">
+              Ideal para operações já estruturadas.
+            </p>
+          </article>
+
+          <!-- 4. PREMIUM -->
+          <article class="flex flex-col rounded-3xl p-7 transition-all duration-300 hover:-translate-y-1.5 bg-card border border-border shadow-sm hover:shadow-xl">
+            <h3 class="font-display font-bold text-3xl text-foreground">Premium</h3>
+            <div class="mt-6">
+              <p class="text-[2.4rem] leading-none font-bold text-foreground">12x de R$ 987,80</p>
+              <p class="mt-2 text-sm font-medium text-foreground/70">Contrato anual</p>
+            </div>
+            <button type="button" onclick="openModal('Premium')" class="mt-6 w-full min-h-[44px] rounded-full font-semibold transition flex items-center justify-center focus-ring bg-foreground text-white hover:opacity-90">
+              Contratar este plano
+            </button>
+            <div class="mt-7 space-y-5 flex-1">
+              <p class="text-sm font-semibold flex items-center gap-2 text-foreground">
+                <svg class="w-4 h-4 text-primary" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M14 5l7 7m0 0l-7 7m7-7H3"/></svg>
+                Tudo do plano Pro
+              </p>
+              <div>
+                <p class="text-[11px] font-bold uppercase tracking-widest mb-2 text-muted-foreground">Matrículas</p>
+                <ul class="space-y-1.5">
+                  <li class="text-sm flex gap-2 text-foreground/85"><svg class="w-4 h-4 shrink-0 mt-0.5 text-primary" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2.5" d="M5 13l4 4L19 7"/></svg><span>Até 30 matrículas durante o contrato anual</span></li>
+                  <li class="text-sm flex gap-2 text-foreground/85"><svg class="w-4 h-4 shrink-0 mt-0.5 text-primary" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2.5" d="M5 13l4 4L19 7"/></svg><span>Até 60 rematrículas durante o contrato anual</span></li>
+                </ul>
+              </div>
+              <div>
+                <p class="text-[11px] font-bold uppercase tracking-widest mb-2 text-muted-foreground">Gestão Financeira</p>
+                <ul class="space-y-1.5">
+                  <li class="text-sm flex gap-2 text-foreground/85"><svg class="w-4 h-4 shrink-0 mt-0.5 text-primary" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2.5" d="M5 13l4 4L19 7"/></svg><span>Emissão de boletos sem limite operacional padrão</span></li>
+                  <li class="text-sm flex gap-2 text-foreground/85"><svg class="w-4 h-4 shrink-0 mt-0.5 text-primary" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2.5" d="M5 13l4 4L19 7"/></svg><span>Segunda via sem limite operacional padrão</span></li>
+                  <li class="text-sm flex gap-2 text-foreground/85"><svg class="w-4 h-4 shrink-0 mt-0.5 text-primary" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2.5" d="M5 13l4 4L19 7"/></svg><span>Cobrança de inadimplentes sem limite padrão</span></li>
+                  <li class="text-sm flex gap-2 text-foreground/85"><svg class="w-4 h-4 shrink-0 mt-0.5 text-primary" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2.5" d="M5 13l4 4L19 7"/></svg><span>Relatório de negociações</span></li>
+                </ul>
+              </div>
+              <div>
+                <p class="text-[11px] font-bold uppercase tracking-widest mb-2 text-muted-foreground">Relatórios</p>
+                <ul class="space-y-1.5">
+                  <li class="text-sm flex gap-2 text-foreground/85"><svg class="w-4 h-4 shrink-0 mt-0.5 text-primary" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2.5" d="M5 13l4 4L19 7"/></svg><span>Conversão de leads e matrículas realizadas</span></li>
+                  <li class="text-sm flex gap-2 text-foreground/85"><svg class="w-4 h-4 shrink-0 mt-0.5 text-primary" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2.5" d="M5 13l4 4L19 7"/></svg><span>Taxa de fechamento</span></li>
+                  <li class="text-sm flex gap-2 text-foreground/85"><svg class="w-4 h-4 shrink-0 mt-0.5 text-primary" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2.5" d="M5 13l4 4L19 7"/></svg><span>2 reuniões semanais e relatório mensal</span></li>
+                </ul>
+              </div>
+              <div>
+                <p class="text-[11px] font-bold uppercase tracking-widest mb-2 text-muted-foreground">Implantação</p>
+                <ul class="space-y-1.5">
+                  <li class="text-sm flex gap-2 text-foreground/85"><svg class="w-4 h-4 shrink-0 mt-0.5 text-primary" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2.5" d="M5 13l4 4L19 7"/></svg><span>CRM Comercial, WhatsApp Business, Class Report</span></li>
+                  <li class="text-sm flex gap-2 text-foreground/85"><svg class="w-4 h-4 shrink-0 mt-0.5 text-primary" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2.5" d="M5 13l4 4L19 7"/></svg><span>Emissão de Notas Fiscais, Documentos Personalizados</span></li>
+                  <li class="text-sm flex gap-2 text-foreground/85"><svg class="w-4 h-4 shrink-0 mt-0.5 text-primary" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2.5" d="M5 13l4 4L19 7"/></svg><span>Certificados de Conclusão, Carteirinha Estudantil</span></li>
+                </ul>
+              </div>
+              <div>
+                <p class="text-[11px] font-bold uppercase tracking-widest mb-2 text-muted-foreground">Gestão Estratégica</p>
+                <ul class="space-y-1.5">
+                  <li class="text-sm flex gap-2 text-foreground/85"><svg class="w-4 h-4 shrink-0 mt-0.5 text-primary" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2.5" d="M5 13l4 4L19 7"/></svg><span>Recomendações de melhoria de processos</span></li>
+                </ul>
+              </div>
+            </div>
+            <p class="mt-6 pt-5 border-t border-border text-sm leading-relaxed text-muted-foreground">
+              Ideal para escolas que desejam terceirizar e profissionalizar sua operação administrativa.
+            </p>
+          </article>
+
+        </div>
+
+        <div class="mt-10 rounded-2xl bg-card border border-border p-6 text-sm text-muted-foreground leading-relaxed max-w-3xl shadow-sm">
+          As quantidades de matrículas e rematrículas referem-se ao período total do contrato anual (12 meses).
+        </div>
+      </div>
+    </section>
+
+    <!-- ================= BENEFÍCIOS INCLUSOS ================= -->
+    <section class="py-24 px-6 bg-card border-y border-border">
+      <div class="max-w-7xl mx-auto">
+        <div class="max-w-3xl">
+          <h2 class="font-display font-bold text-4xl md:text-5xl text-foreground leading-tight tracking-tight">
+            O que está incluso nos planos?
+          </h2>
+          <p class="mt-4 text-muted-foreground leading-relaxed text-base md:text-lg">
+            A Campanella ProfSupport não oferece apenas atendimento administrativo. Nossa proposta é assumir parte da operação da escola para que o professor possa focar no ensino, na experiência dos alunos e no crescimento do negócio.
+          </p>
+        </div>
+
+        <div class="mt-14 grid sm:grid-cols-2 lg:grid-cols-3 gap-6">
+
+          <!-- Comercial -->
+          <div class="rounded-3xl border border-border bg-[#F8F9FA] p-7 shadow-sm transition hover:shadow-md">
+            <div class="flex items-center gap-3">
+              <span class="w-11 h-11 rounded-2xl bg-primary/10 text-primary flex items-center justify-center">
+                <!-- Phone -->
+                <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 5a2 2 0 012-2h3.28a1 1 0 01.948.684l1.498 4.493a1 1 0 01-.502 1.21l-2.257 1.13a11.042 11.042 0 005.516 5.516l1.13-2.257a1 1 0 011.21-.502l4.493 1.498a1 1 0 01.684.949V19a2 2 0 01-2 2h-1C9.716 21 3 14.284 3 6V5z"/></svg>
+              </span>
+              <h3 class="font-display font-bold text-xl text-foreground">Comercial</h3>
+            </div>
+            <ul class="mt-5 space-y-2.5">
+              <li class="text-sm text-foreground/80 flex gap-2"><svg class="w-4 h-4 shrink-0 mt-0.5 text-primary" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2.5" d="M5 13l4 4L19 7"/></svg><span>Atendimento inicial dos leads</span></li>
+              <li class="text-sm text-foreground/80 flex gap-2"><svg class="w-4 h-4 shrink-0 mt-0.5 text-primary" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2.5" d="M5 13l4 4L19 7"/></svg><span>Follow-up comercial</span></li>
+              <li class="text-sm text-foreground/80 flex gap-2"><svg class="w-4 h-4 shrink-0 mt-0.5 text-primary" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2.5" d="M5 13l4 4L19 7"/></svg><span>Organização do CRM</span></li>
+              <li class="text-sm text-foreground/80 flex gap-2"><svg class="w-4 h-4 shrink-0 mt-0.5 text-primary" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2.5" d="M5 13l4 4L19 7"/></svg><span>Agendamento de reuniões</span></li>
+              <li class="text-sm text-foreground/80 flex gap-2"><svg class="w-4 h-4 shrink-0 mt-0.5 text-primary" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2.5" d="M5 13l4 4L19 7"/></svg><span>Recuperação de leads e alunos inativos (conforme plano)</span></li>
+            </ul>
+          </div>
+
+          <!-- Matrículas -->
+          <div class="rounded-3xl border border-border bg-[#F8F9FA] p-7 shadow-sm transition hover:shadow-md">
+            <div class="flex items-center gap-3">
+              <span class="w-11 h-11 rounded-2xl bg-primary/10 text-primary flex items-center justify-center">
+                <!-- GraduationCap -->
+                <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 14l9-5-9-5-9 5 9 5z"/><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 14l6.16-3.422a12.083 12.083 0 01.665 6.479A11.952 11.952 0 0012 20.055a11.952 11.952 0 00-6.824-2.998 12.078 12.078 0 01.665-6.479L12 14z"/></svg>
+              </span>
+              <h3 class="font-display font-bold text-xl text-foreground">Matrículas</h3>
+            </div>
+            <ul class="mt-5 space-y-2.5">
+              <li class="text-sm text-foreground/80 flex gap-2"><svg class="w-4 h-4 shrink-0 mt-0.5 text-primary" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2.5" d="M5 13l4 4L19 7"/></svg><span>Gestão de matrículas</span></li>
+              <li class="text-sm text-foreground/80 flex gap-2"><svg class="w-4 h-4 shrink-0 mt-0.5 text-primary" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2.5" d="M5 13l4 4L19 7"/></svg><span>Gestão de rematrículas</span></li>
+              <li class="text-sm text-foreground/80 flex gap-2"><svg class="w-4 h-4 shrink-0 mt-0.5 text-primary" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2.5" d="M5 13l4 4L19 7"/></svg><span>Acompanhamento de conversão</span></li>
+              <li class="text-sm text-foreground/80 flex gap-2"><svg class="w-4 h-4 shrink-0 mt-0.5 text-primary" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2.5" d="M5 13l4 4L19 7"/></svg><span>Relatórios de fechamento</span></li>
+            </ul>
+          </div>
+
+          <!-- Gestão Financeira -->
+          <div class="rounded-3xl border border-border bg-[#F8F9FA] p-7 shadow-sm transition hover:shadow-md">
+            <div class="flex items-center gap-3">
+              <span class="w-11 h-11 rounded-2xl bg-primary/10 text-primary flex items-center justify-center">
+                <!-- Wallet -->
+                <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 10h18M7 15h1m4 0h1m-7 4h12a3 3 0 003-3V8a3 3 0 00-3-3H6a3 3 0 00-3 3v8a3 3 0 003 3z"/></svg>
+              </span>
+              <h3 class="font-display font-bold text-xl text-foreground">Gestão Financeira</h3>
+            </div>
+            <ul class="mt-5 space-y-2.5">
+              <li class="text-sm text-foreground/80 flex gap-2"><svg class="w-4 h-4 shrink-0 mt-0.5 text-primary" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2.5" d="M5 13l4 4L19 7"/></svg><span>Emissão de boletos</span></li>
+              <li class="text-sm text-foreground/80 flex gap-2"><svg class="w-4 h-4 shrink-0 mt-0.5 text-primary" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2.5" d="M5 13l4 4L19 7"/></svg><span>Segunda via de boletos</span></li>
+              <li class="text-sm text-foreground/80 flex gap-2"><svg class="w-4 h-4 shrink-0 mt-0.5 text-primary" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2.5" d="M5 13l4 4L19 7"/></svg><span>Cobrança de inadimplentes</span></li>
+              <li class="text-sm text-foreground/80 flex gap-2"><svg class="w-4 h-4 shrink-0 mt-0.5 text-primary" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2.5" d="M5 13l4 4L19 7"/></svg><span>Relatórios financeiros e negociações (conforme plano)</span></li>
+            </ul>
+          </div>
+
+          <!-- Relatórios e Gestão -->
+          <div class="rounded-3xl border border-border bg-[#F8F9FA] p-7 shadow-sm transition hover:shadow-md">
+            <div class="flex items-center gap-3">
+              <span class="w-11 h-11 rounded-2xl bg-primary/10 text-primary flex items-center justify-center">
+                <!-- ChartColumn -->
+                <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 19v-6a2 2 0 00-2-2H5a2 2 0 00-2 2v6a2 2 0 002 2h2a2 2 0 002-2zm0 0V9a2 2 0 012-2h2a2 2 0 012 2v10m-6 0a2 2 0 002 2h2a2 2 0 002-2m0 0V5a2 2 0 012-2h2a2 2 0 012 2v14a2 2 0 01-2 2h-2a2 2 0 01-2-2z"/></svg>
+              </span>
+              <h3 class="font-display font-bold text-xl text-foreground">Relatórios e Gestão</h3>
+            </div>
+            <ul class="mt-5 space-y-2.5">
+              <li class="text-sm text-foreground/80 flex gap-2"><svg class="w-4 h-4 shrink-0 mt-0.5 text-primary" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2.5" d="M5 13l4 4L19 7"/></svg><span>Reuniões de alinhamento</span></li>
+              <li class="text-sm text-foreground/80 flex gap-2"><svg class="w-4 h-4 shrink-0 mt-0.5 text-primary" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2.5" d="M5 13l4 4L19 7"/></svg><span>Relatórios mensais</span></li>
+              <li class="text-sm text-foreground/80 flex gap-2"><svg class="w-4 h-4 shrink-0 mt-0.5 text-primary" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2.5" d="M5 13l4 4L19 7"/></svg><span>Indicadores de conversão</span></li>
+              <li class="text-sm text-foreground/80 flex gap-2"><svg class="w-4 h-4 shrink-0 mt-0.5 text-primary" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2.5" d="M5 13l4 4L19 7"/></svg><span>Recomendações de melhoria de processos (Premium)</span></li>
+            </ul>
+          </div>
+
+          <!-- Implantações Inclusas -->
+          <div class="rounded-3xl border border-border bg-[#F8F9FA] p-7 shadow-sm transition hover:shadow-md sm:col-span-2 lg:col-span-2">
+            <div class="flex items-center gap-3">
+              <span class="w-11 h-11 rounded-2xl bg-primary/10 text-primary flex items-center justify-center">
+                <!-- Wrench -->
+                <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M10.325 4.317c.426-1.756 2.924-1.756 3.35 0a1.724 1.724 0 002.573 1.066c1.543-.94 3.31.826 2.37 2.37a1.724 1.724 0 001.065 2.572c1.756.426 1.756 2.924 0 3.35a1.724 1.724 0 00-1.066 2.573c.94 1.543-.826 3.31-2.37 2.37a1.724 1.724 0 00-2.572 1.065c-.426 1.756-2.924 1.756-3.35 0a1.724 1.724 0 00-2.573-1.066c-1.543.94-3.31-.826-2.37-2.37a1.724 1.724 0 00-1.065-2.572c-1.756-.426-1.756-2.924 0-3.35a1.724 1.724 0 001.066-2.573c-.94-1.543.826-3.31 2.37-2.37.996.608 2.296.07 2.572-1.065z"/><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 12a3 3 0 11-6 0 3 3 0 016 0z"/></svg>
+              </span>
+              <h3 class="font-display font-bold text-xl text-foreground">Implantações Inclusas</h3>
+            </div>
+            <ul class="mt-5 grid sm:grid-cols-2 gap-2.5">
+              <li class="text-sm text-foreground/80 flex gap-2"><svg class="w-4 h-4 shrink-0 mt-0.5 text-primary" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2.5" d="M5 13l4 4L19 7"/></svg><span>CRM Comercial</span></li>
+              <li class="text-sm text-foreground/80 flex gap-2"><svg class="w-4 h-4 shrink-0 mt-0.5 text-primary" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2.5" d="M5 13l4 4L19 7"/></svg><span>WhatsApp Business</span></li>
+              <li class="text-sm text-foreground/80 flex gap-2"><svg class="w-4 h-4 shrink-0 mt-0.5 text-primary" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2.5" d="M5 13l4 4L19 7"/></svg><span>Class Report</span></li>
+              <li class="text-sm text-foreground/80 flex gap-2"><svg class="w-4 h-4 shrink-0 mt-0.5 text-primary" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2.5" d="M5 13l4 4L19 7"/></svg><span>Pesquisa de Satisfação</span></li>
+            </ul>
+          </div>
+
+        </div>
+      </div>
+    </section>
+
+    <!-- ================= POR RESULTADO ================= -->
+    <section id="resultado" class="py-24 px-6 bg-foreground text-white">
+      <div class="max-w-7xl mx-auto">
+        <h2 class="font-display font-bold text-4xl md:text-5xl text-white tracking-tight">
+          Comissão por matrícula fechada
+        </h2>
+        <p class="mt-4 text-white/70 max-w-2xl leading-relaxed text-base md:text-lg">
+          Disponível exclusivamente para escolas que possuem um plano ativo da Campanella ProfSupport. Nós realizamos o atendimento comercial, conduzimos as reuniões e auxiliamos no fechamento. A comissão é cobrada apenas quando ocorre matrícula efetivada.
+        </p>
+
+        <div class="mt-12 grid lg:grid-cols-[1fr_1.2fr] gap-8">
+          <!-- Coluna Esquerda: Como Funciona -->
+          <div class="rounded-3xl bg-white/5 backdrop-blur-xl border border-white/10 p-8 shadow-xl">
+            <h3 class="font-display font-bold text-2xl text-white">Como funciona a comissão por matrícula?</h3>
+            <ol class="mt-6 space-y-3">
+              <li class="flex gap-3 text-sm text-white/80">
+                <span class="shrink-0 w-6 h-6 rounded-full bg-primary text-white text-xs font-semibold flex items-center justify-center">1</span>
+                <span class="pt-0.5">A escola recebe um novo lead.</span>
+              </li>
+              <li class="flex gap-3 text-sm text-white/80">
+                <span class="shrink-0 w-6 h-6 rounded-full bg-primary text-white text-xs font-semibold flex items-center justify-center">2</span>
+                <span class="pt-0.5">A Campanella realiza o atendimento comercial.</span>
+              </li>
+              <li class="flex gap-3 text-sm text-white/80">
+                <span class="shrink-0 w-6 h-6 rounded-full bg-primary text-white text-xs font-semibold flex items-center justify-center">3</span>
+                <span class="pt-0.5">Fazemos o acompanhamento do interessado.</span>
+              </li>
+              <li class="flex gap-3 text-sm text-white/80">
+                <span class="shrink-0 w-6 h-6 rounded-full bg-primary text-white text-xs font-semibold flex items-center justify-center">4</span>
+                <span class="pt-0.5">Conduzimos a reunião comercial quando necessário.</span>
+              </li>
+              <li class="flex gap-3 text-sm text-white/80">
+                <span class="shrink-0 w-6 h-6 rounded-full bg-primary text-white text-xs font-semibold flex items-center justify-center">5</span>
+                <span class="pt-0.5">Caso a matrícula seja efetivada, a comissão é cobrada.</span>
+              </li>
+              <li class="flex gap-3 text-sm text-white/80">
+                <span class="shrink-0 w-6 h-6 rounded-full bg-primary text-white text-xs font-semibold flex items-center justify-center">6</span>
+                <span class="pt-0.5">Se não houver matrícula, não existe cobrança de comissão.</span>
+              </li>
+            </ol>
+
+            <div class="mt-6 rounded-xl bg-primary/15 border border-primary/30 p-4 flex gap-3">
+              <svg class="w-5 h-5 text-primary shrink-0 mt-0.5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 9v2m0 4h.01m-6.938 4h13.856c1.54 0 2.502-1.667 1.732-3L13.732 4c-.77-1.333-2.694-1.333-3.464 0L3.34 16c-.77 1.333.192 3 1.732 3z"/></svg>
+              <div>
+                <p class="text-sm font-semibold text-white">Importante</p>
+                <p class="mt-1 text-sm text-white/70">A comissão não substitui o plano contratado. Ela é aplicada apenas quando ocorre resultado efetivo.</p>
+              </div>
+            </div>
+          </div>
+
+          <!-- Coluna Direita: Os 2 Serviços -->
+          <div class="grid sm:grid-cols-2 gap-6 content-start">
+            <div class="rounded-3xl bg-white/5 backdrop-blur-xl border border-white/10 p-8 flex flex-col shadow-xl">
+              <svg class="w-6 h-6 text-primary" fill="none" stroke="currentColor" viewBox="0 0 24 24"><circle cx="12" cy="12" r="10" stroke-width="2"/><circle cx="12" cy="12" r="6" stroke-width="2"/><circle cx="12" cy="12" r="2" stroke-width="2"/></svg>
+              <h3 class="mt-5 text-xl font-semibold leading-snug text-white">Fechamento Comercial por WhatsApp</h3>
+              <p class="mt-3 text-[2rem] leading-none font-bold text-primary">R$ 50</p>
+              <p class="mt-2 text-sm text-white/60">por matrícula efetivada</p>
+              <p class="mt-4 text-sm text-white/70 leading-relaxed flex-1">Atendimento, acompanhamento e conversão de leads diretamente pelo WhatsApp.</p>
+              <a
+                href="https://wa.me/5541991644723?text=Ol%C3%A1%2C%20gostaria%20de%20contratar%20o%20servi%C3%A7o%20Fechamento%20Comercial%20por%20WhatsApp."
+                target="_blank"
+                rel="noreferrer"
+                class="mt-6 inline-flex items-center justify-center min-h-[44px] px-6 rounded-full bg-primary text-white text-sm font-semibold hover:brightness-95 transition focus-ring shadow-sm"
+              >
+                Falar pelo WhatsApp
+              </a>
+            </div>
+
+            <div class="rounded-3xl bg-white/5 backdrop-blur-xl border border-white/10 p-8 flex flex-col shadow-xl">
+              <svg class="w-6 h-6 text-primary" fill="none" stroke="currentColor" viewBox="0 0 24 24"><circle cx="12" cy="12" r="10" stroke-width="2"/><circle cx="12" cy="12" r="6" stroke-width="2"/><circle cx="12" cy="12" r="2" stroke-width="2"/></svg>
+              <h3 class="mt-5 text-xl font-semibold leading-snug text-white">Fechamento Comercial por Reunião</h3>
+              <p class="mt-3 text-[2rem] leading-none font-bold text-primary">R$ 100</p>
+              <p class="mt-2 text-sm text-white/60">por matrícula efetivada</p>
+              <p class="mt-4 text-sm text-white/70 leading-relaxed flex-1">Condução da reunião comercial, apresentação da proposta e suporte ao fechamento.</p>
+              <a
+                href="https://wa.me/5541991644723?text=Ol%C3%A1%2C%20gostaria%20de%20contratar%20o%20servi%C3%A7o%20Fechamento%20Comercial%20por%20Reuni%C3%A3o."
+                target="_blank"
+                rel="noreferrer"
+                class="mt-6 inline-flex items-center justify-center min-h-[44px] px-6 rounded-full bg-primary text-white text-sm font-semibold hover:brightness-95 transition focus-ring shadow-sm"
+              >
+                Falar pelo WhatsApp
+              </a>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- ================= IMPLANTAÇÕES ================= -->
+    <section id="implantacoes" class="py-24 px-6 bg-[#F8F9FA]">
+      <div class="max-w-7xl mx-auto">
+        <div class="max-w-3xl">
+          <h2 class="font-display font-bold text-4xl md:text-5xl text-foreground leading-tight tracking-tight">
+            Implantações Inclusas nos Planos
+          </h2>
+          <p class="mt-4 text-muted-foreground leading-relaxed">
+            As implantações fazem parte dos respectivos planos da Campanella ProfSupport e não podem ser contratadas separadamente ou adicionadas individualmente a outros planos.
+          </p>
+          <p class="mt-3 text-muted-foreground leading-relaxed">
+            A utilização dessas implantações não é obrigatória, ficando a critério da escola contratante aderir ou não às ferramentas disponibilizadas.
+          </p>
+        </div>
+
+        <div class="mt-14 grid sm:grid-cols-2 lg:grid-cols-4 gap-6">
+          <!-- CRM Comercial -->
+          <div class="rounded-3xl border border-border bg-card p-7 shadow-sm transition hover:shadow-md">
+            <span class="w-11 h-11 rounded-2xl bg-primary/10 text-primary flex items-center justify-center">
+              <!-- Database -->
+              <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><ellipse cx="12" cy="5" rx="9" ry="3" stroke-width="2"/><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M21 12c0 1.66-4 3-9 3s-9-1.34-9-3m18 7c0 1.66-4 3-9 3s-9-1.34-9-3"/></svg>
+            </span>
+            <h3 class="mt-5 font-display font-bold text-xl text-foreground">CRM Comercial</h3>
+            <p class="mt-2 text-sm text-muted-foreground leading-relaxed">Organização dos leads, acompanhamento comercial e estruturação do processo de atendimento.</p>
+          </div>
+
+          <!-- WhatsApp Business -->
+          <div class="rounded-3xl border border-border bg-card p-7 shadow-sm transition hover:shadow-md">
+            <span class="w-11 h-11 rounded-2xl bg-primary/10 text-primary flex items-center justify-center">
+              <!-- MessageSquare -->
+              <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M8 12h.01M12 12h.01M16 12h.01M21 12c0 4.418-4.03 8-9 8a9.863 9.863 0 01-4.255-.949L3 20l1.395-3.72C3.512 15.042 3 13.574 3 12c0-4.418 4.03-8 9-8s9 3.582 9 8z"/></svg>
+            </span>
+            <h3 class="mt-5 font-display font-bold text-xl text-foreground">WhatsApp Business</h3>
+            <p class="mt-2 text-sm text-muted-foreground leading-relaxed">Organização de etiquetas, respostas rápidas e fluxos de atendimento.</p>
+          </div>
+
+          <!-- Class Report -->
+          <div class="rounded-3xl border border-border bg-card p-7 shadow-sm transition hover:shadow-md">
+            <span class="w-11 h-11 rounded-2xl bg-primary/10 text-primary flex items-center justify-center">
+              <!-- FileBarChart -->
+              <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 17v-2m3 2v-4m3 4v-6m2 10H7a2 2 0 01-2-2V5a2 2 0 012-2h5.586a1 1 0 01.707.293l5.414 5.414a1 1 0 01.293.707V19a2 2 0 01-2 2z"/></svg>
+            </span>
+            <h3 class="mt-5 font-display font-bold text-xl text-foreground">Class Report</h3>
+            <p class="mt-2 text-sm text-muted-foreground leading-relaxed">Estruturação de relatórios pedagógicos e acompanhamento de professores, turmas e alunos.</p>
+          </div>
+
+          <!-- Pesquisa de Satisfação -->
+          <div class="rounded-3xl border border-border bg-card p-7 shadow-sm transition hover:shadow-md">
+            <span class="w-11 h-11 rounded-2xl bg-primary/10 text-primary flex items-center justify-center">
+              <!-- ClipboardCheck -->
+              <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5H7a2 2 0 00-2 2v12a2 2 0 002 2h10a2 2 0 002-2V7a2 2 0 00-2-2h-2M9 5a2 2 0 002 2h2a2 2 0 002-2M9 5a2 2 0 012-2h2a2 2 0 012 2m-6 9l2 2 4-4"/></svg>
+            </span>
+            <h3 class="mt-5 font-display font-bold text-xl text-foreground">Pesquisa de Satisfação</h3>
+            <p class="mt-2 text-sm text-muted-foreground leading-relaxed">Aplicação e organização de pesquisas de satisfação para acompanhamento da experiência dos alunos.</p>
+          </div>
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <!-- ================= FOOTER ================= -->
+  <footer class="bg-foreground text-white px-6 pt-20 pb-10 border-t border-white/10">
+    <div class="max-w-7xl mx-auto">
+      <div class="grid md:grid-cols-2 gap-10 items-start">
+        <div>
+          <p class="font-display font-bold text-3xl md:text-4xl text-white">
+            Campanella <span class="italic text-primary font-serif-instrument font-normal">ProfSupport</span>
+          </p>
+          <p class="mt-4 text-white/60 max-w-md leading-relaxed">
+            Gestão administrativa especializada para professores e escolas de idiomas.
+          </p>
+          <button onclick="openModal('')" class="mt-8 bg-primary text-white font-semibold px-6 min-h-[44px] rounded-full hover:brightness-95 transition focus-ring shadow-sm">
+            Falar pelo WhatsApp
+          </button>
+        </div>
+
+        <div class="grid grid-cols-2 gap-8 text-sm">
+          <div class="space-y-2.5">
+            <p class="text-white/40 uppercase tracking-widest text-[11px] font-bold mb-3">Navegação</p>
+            <a href="#como-funciona" class="block text-white/70 hover:text-white transition-colors">Como funciona</a>
+            <a href="#planos" class="block text-white/70 hover:text-white transition-colors">Planos</a>
+            <a href="#resultado" class="block text-white/70 hover:text-white transition-colors">Serviços por resultado</a>
+            <a href="#implantacoes" class="block text-white/70 hover:text-white transition-colors">Implantações</a>
+          </div>
+
+          <div class="space-y-2.5">
+            <p class="text-white/40 uppercase tracking-widest text-[11px] font-bold mb-3">Contato</p>
+            <a href="mailto:contato@campanellaprofsupport.com" class="block text-white/70 hover:text-white transition-colors break-all">
+              contato@campanellaprofsupport.com
+            </a>
+            <a href="https://wa.me/5541991644723" target="_blank" rel="noreferrer" class="block text-white/70 hover:text-white transition-colors">
+              WhatsApp: (41) 99164-4723
+            </a>
+          </div>
+        </div>
+      </div>
+
+      <div class="mt-16 pt-8 border-t border-white/10 text-xs text-white/40 flex flex-col md:flex-row gap-3 md:justify-between">
+        <span>© <span id="current-year"></span> Campanella ProfSupport. Todos os direitos reservados.</span>
+        <span>Contrato anual · Valores referentes à parcela mensal do plano contratado.</span>
+      </div>
+    </div>
+  </footer>
+
+  <!-- ================= MODAL / CONTACT PANEL ================= -->
+  <div id="contact-modal" class="fixed inset-0 z-50 hidden flex items-end md:items-center justify-center p-0 md:p-6" role="dialog" aria-modal="true">
+    <!-- Backdrop -->
+    <div id="modal-backdrop" class="absolute inset-0 bg-foreground/60 backdrop-blur-sm transition-opacity opacity-0"></div>
+
+    <!-- Modal Card -->
+    <div id="modal-card" class="relative bg-card w-full md:max-w-lg rounded-t-3xl md:rounded-3xl p-8 max-h-[92vh] overflow-y-auto shadow-2xl transition-all transform translate-y-10 opacity-0">
+      <button onclick="closeModal()" aria-label="Fechar" class="absolute top-5 right-5 w-11 h-11 rounded-full flex items-center justify-center hover:bg-muted text-muted-foreground hover:text-foreground focus-ring transition">
+        <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12"/></svg>
+      </button>
+
+      <form id="contact-form" onsubmit="handleFormSubmit(event)" class="space-y-4">
+        <div>
+          <p class="text-xs uppercase tracking-widest text-muted-foreground font-semibold">Solicitar proposta</p>
+          <h3 id="modal-title" class="font-display font-bold text-3xl text-foreground mt-1">Fale com a equipe</h3>
+          <p id="modal-selected-plan" class="hidden text-sm text-primary font-medium mt-1"></p>
+        </div>
+
+        <div>
+          <label for="form-name" class="sr-only">Nome</label>
+          <input id="form-name" required placeholder="Nome *" class="w-full min-h-[44px] px-4 rounded-xl bg-muted border border-border focus-ring text-sm" />
+        </div>
+
+        <div>
+          <label for="form-email" class="sr-only">E-mail</label>
+          <input id="form-email" required type="email" placeholder="E-mail *" class="w-full min-h-[44px] px-4 rounded-xl bg-muted border border-border focus-ring text-sm" />
+        </div>
+
+        <div>
+          <label for="form-school" class="sr-only">Escola</label>
+          <input id="form-school" placeholder="Escola" class="w-full min-h-[44px] px-4 rounded-xl bg-muted border border-border focus-ring text-sm" />
+        </div>
+
+        <div>
+          <label for="form-phone" class="sr-only">WhatsApp</label>
+          <input id="form-phone" placeholder="WhatsApp (DDD + Número)" class="w-full min-h-[44px] px-4 rounded-xl bg-muted border border-border focus-ring text-sm" />
+        </div>
+
+        <div>
+          <label for="form-students" class="sr-only">Quantidade atual de alunos</label>
+          <input id="form-students" placeholder="Quantidade atual de alunos" class="w-full min-h-[44px] px-4 rounded-xl bg-muted border border-border focus-ring text-sm" />
+        </div>
+
+        <div>
+          <label for="form-message" class="sr-only">Mensagem adicional</label>
+          <textarea id="form-message" rows="3" placeholder="Mensagem adicional" class="w-full p-4 rounded-xl bg-muted border border-border focus-ring text-sm"></textarea>
+        </div>
+
+        <p id="form-error" class="hidden text-sm text-destructive font-medium"></p>
+
+        <button type="submit" class="w-full bg-primary text-white font-semibold min-h-[48px] rounded-full hover:brightness-95 transition focus-ring flex items-center justify-center gap-2 shadow-sm">
+          <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2.5" d="M5 13l4 4L19 7"/></svg>
+          Enviar para o WhatsApp
+        </button>
+
+        <p class="text-xs text-muted-foreground text-center">
+          Ao enviar, abriremos o WhatsApp com sua mensagem pronta.
+        </p>
+      </form>
+    </div>
+  </div>
+
+  <!-- ================= JAVASCRIPT ================= -->
+  <script>
+    // Configura ano atual no footer
+    document.getElementById("current-year").textContent = new Date().getFullYear();
+
+    // Scroll Navbar effect
+    const nav = document.getElementById("main-nav");
+    window.addEventListener("scroll", () => {
+      if (window.scrollY > 40) {
+        nav.classList.remove("bg-transparent");
+        nav.classList.add("bg-white/85", "backdrop-blur-xl", "border-b", "border-border", "shadow-sm");
+      } else {
+        nav.classList.add("bg-transparent");
+        nav.classList.remove("bg-white/85", "backdrop-blur-xl", "border-b", "border-border", "shadow-sm");
+      }
+    });
+
+    // Mobile menu toggle
+    const mobileBtn = document.getElementById("mobile-menu-btn");
+    const mobileMenu = document.getElementById("mobile-menu");
+    mobileBtn.addEventListener("click", () => {
+      mobileMenu.classList.toggle("hidden");
+    });
+    mobileMenu.querySelectorAll("a").forEach(link => {
+      link.addEventListener("click", () => mobileMenu.classList.add("hidden"));
+    });
+
+    // Modal state
+    let selectedInterest = "";
+    const modal = document.getElementById("contact-modal");
+    const backdrop = document.getElementById("modal-backdrop");
+    const card = document.getElementById("modal-card");
+    const modalTitle = document.getElementById("modal-title");
+    const modalSelectedPlan = document.getElementById("modal-selected-plan");
+    const formError = document.getElementById("form-error");
+
+    function openModal(interest = "") {
+      selectedInterest = interest;
+      if (interest) {
+        modalTitle.textContent = `Contratar plano ${interest}`;
+        modalSelectedPlan.textContent = `Plano selecionado: ${interest}`;
+        modalSelectedPlan.classList.remove("hidden");
+      } else {
+        modalTitle.textContent = "Fale com a equipe";
+        modalSelectedPlan.classList.add("hidden");
+      }
+
+      formError.classList.add("hidden");
+      modal.classList.remove("hidden");
+      document.body.style.overflow = "hidden";
+
+      requestAnimationFrame(() => {
+        backdrop.classList.remove("opacity-0");
+        backdrop.classList.add("opacity-100");
+        card.classList.remove("opacity-0", "translate-y-10");
+        card.classList.add("opacity-100", "translate-y-0");
+      });
+    }
+
+    function closeModal() {
+      backdrop.classList.remove("opacity-100");
+      backdrop.classList.add("opacity-0");
+      card.classList.remove("opacity-100", "translate-y-0");
+      card.classList.add("opacity-0", "translate-y-10");
+
+      setTimeout(() => {
+        modal.classList.add("hidden");
+        document.body.style.overflow = "";
+      }, 200);
+    }
+
+    backdrop.addEventListener("click", closeModal);
+
+    // Form submit -> WhatsApp redirect
+    function handleFormSubmit(e) {
+      e.preventDefault();
+      const name = document.getElementById("form-name").value.trim();
+      const email = document.getElementById("form-email").value.trim();
+      const school = document.getElementById("form-school").value.trim() || "-";
+      const phone = document.getElementById("form-phone").value.trim() || "-";
+      const students = document.getElementById("form-students").value.trim() || "-";
+      const message = document.getElementById("form-message").value.trim() || "-";
+
+      if (!name || !email) {
+        formError.textContent = "Preencha pelo menos nome e e-mail.";
+        formError.classList.remove("hidden");
+        return;
+      }
+
+      let text = "Olá, gostaria de contratar um plano da Campanella ProfSupport.\n\n";
+      if (selectedInterest) {
+        text += `Plano escolhido: ${selectedInterest}\n`;
+      }
+      text += `Nome: ${name}\n`;
+      text += `E-mail: ${email}\n`;
+      text += `Escola: ${school}\n`;
+      text += `WhatsApp: ${phone}\n`;
+      text += `Quantidade atual de alunos: ${students}\n`;
+      text += `Mensagem adicional:\n${message}`;
+
+      const waUrl = `https://wa.me/5541991644723?text=${encodeURIComponent(text)}`;
+      window.open(waUrl, "_blank");
+
+      document.getElementById("contact-form").reset();
+      closeModal();
+    }
+  </script>
+</body>
+</html>
